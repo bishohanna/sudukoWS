@@ -2,13 +2,9 @@ package com.suduko;
 
 import com.suduko.game.board.SudukoBoard;
 import com.suduko.game.board.SudukoBoardBuilder;
-import com.suduko.game.board.block.Block;
-import com.suduko.game.response.BlockOperationResult;
 import com.suduko.game.response.BoardResult;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
 
 public class SudukoBoardMovementTest {
 
@@ -38,7 +34,7 @@ public class SudukoBoardMovementTest {
         Assert.assertTrue("Adding number 1 at (1,2) should succeed", adding1.isOperationSuccess());
 
         //print output
-        printBlockResults(adding1.getOperationResults());
+        SudukoTestUtils.printBlockResults(adding1.getOperationResults());
         SudukoTestUtils.printBoard(adding1.getBoard().getBoardValues());
     }
 
@@ -53,7 +49,7 @@ public class SudukoBoardMovementTest {
         Assert.assertFalse("Adding the number 4 should fail", adding4.isOperationSuccess());
 
         //print output
-        printBlockResults(adding4.getOperationResults());
+        SudukoTestUtils.printBlockResults(adding4.getOperationResults());
         SudukoTestUtils.printBoard(adding4.getBoard().getBoardValues());
     }
 
@@ -65,14 +61,14 @@ public class SudukoBoardMovementTest {
         //add a number
         BoardResult adding1 = board.addNumber(1, 1, 2);
         Assert.assertTrue("Adding number 1 at (1,2) should succeed", adding1.isOperationSuccess());
-        printBlockResults(adding1.getOperationResults());
+        SudukoTestUtils.printBlockResults(adding1.getOperationResults());
         SudukoTestUtils.printBoard(adding1.getBoard().getBoardValues());
 
         //remove it
         BoardResult remove1 = board.removeNumber(1, 1, 2);
         Assert.assertTrue("Removing number 1 at (1,2) should succeed", remove1.isOperationSuccess());
 
-        printBlockResults(remove1.getOperationResults());
+        SudukoTestUtils.printBlockResults(remove1.getOperationResults());
         SudukoTestUtils.printBoard(remove1.getBoard().getBoardValues());
     }
 
@@ -81,11 +77,4 @@ public class SudukoBoardMovementTest {
         return new SudukoBoardBuilder(boardValues).buildBoard().getBoard();
     }
 
-    private void printBlockResults(List<BlockOperationResult> blockOperationResults) {
-        for (BlockOperationResult result : blockOperationResults) {
-            Block block = result.getBlock();
-            System.out.println(String.format("Block [%s,%s],[%s,%s], Success: %s, Message: %s",
-                    block.getFromX(), block.getToX(), block.getFromY(), block.getToY(), result.isOperationSuccess(), result.getMessage()));
-        }
-    }
 }

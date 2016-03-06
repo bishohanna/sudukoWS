@@ -53,7 +53,7 @@ public final class SudukoBoardImpl implements SudukoBoard {
         }
 
         return new BoardResult(this, canBeAdded)
-                .setMessage(canBeAdded ? "Number can be added" : "Number can't be added");
+                .setMessage(canBeAdded ? "Number can be added" : "Number can't be added").setBoardValid(false);
     }
 
 
@@ -101,7 +101,7 @@ public final class SudukoBoardImpl implements SudukoBoard {
 
         return new BoardResult(this, addSuccess)
                 .setMessage(addSuccess ? "Number is added" : "Number can't be added")
-                .setOperationResults(addResults);
+                .setOperationResults(addResults).setBoardValid(false);
     }
 
 
@@ -131,7 +131,7 @@ public final class SudukoBoardImpl implements SudukoBoard {
         //remove from board
         board[x - 1][y - 1] = 0;//reset the value
 
-        return new BoardResult(this, "Number removed", true).setOperationResults(removeResults);
+        return new BoardResult(this, "Number removed", true).setOperationResults(removeResults).setBoardValid(false);
     }
 
     /**
@@ -156,6 +156,7 @@ public final class SudukoBoardImpl implements SudukoBoard {
 
         return new BoardResult(this, boardValid)
                 .setOperationResults(blockResults)
+                .setBoardValid(boardValid)
                 .setMessage(boardValid ? "Board is Valid" : "Board is Invalid");
     }
 

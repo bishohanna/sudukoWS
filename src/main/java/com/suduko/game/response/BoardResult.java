@@ -12,7 +12,7 @@ public class BoardResult implements Serializable {
     private final SudukoBoard board;
 
     //express if the last operation succeeded
-    private final boolean operationSuccess;
+    private boolean operationSuccess;
 
     //express the message attached to final operation , failure message if the operation failed
     private String message;
@@ -67,6 +67,12 @@ public class BoardResult implements Serializable {
 
     public BoardResult setBoardValid(boolean boardValid) {
         this.boardValid = boardValid;
+
+        return this;
+    }
+
+    public BoardResult setOperationSuccess(boolean operationSuccess) {
+        this.operationSuccess = operationSuccess;
 
         return this;
     }
