@@ -74,11 +74,11 @@ public class SudukoBoardValidationTest {
 
 
     private SudukoBoard createCompleteBoard() {
-        return new SudukoBoardBuilder(sudukoCompleteBoard).buildBoard().getBoard();
+        return new SudukoBoardBuilder().buildBoard(sudukoCompleteBoard).getBoard();
     }
 
     private SudukoBoard createUnCompleteBoard() {
-        return new SudukoBoardBuilder(sudukoUnCompleteBoard).buildBoard().getBoard();
+        return new SudukoBoardBuilder().buildBoard(sudukoUnCompleteBoard).getBoard();
     }
 
 }

@@ -1,26 +1,29 @@
 package com.suduko.game.board;
 
-import com.suduko.game.board.builder.*;
+import com.suduko.game.board.builder.BoardValuesBuilder;
+import com.suduko.game.board.builder.LineBlocksBuilder;
+import com.suduko.game.board.builder.SquareBlockBuilder;
+import com.suduko.game.board.builder.SudukoBuilderNode;
 import com.suduko.game.response.BoardResult;
+import org.springframework.stereotype.Component;
 
-public final class SudukoBoardBuilder {
+@Component
+public class SudukoBoardBuilder {
 
-    private final int[][] boardValues;
     private SudukoBuilderNode initialNode;
 
-    public SudukoBoardBuilder(int[][] boardValues) {
-        this.boardValues = boardValues;
+    public SudukoBoardBuilder() {
 
         //initializes builder chain
         initializeBuilder();
     }
 
 
-    public BoardResult buildBoard() {
+    public BoardResult buildBoard(int[][] boardValues) {
 
 
         //1- validate board values
-        if (!validateBoardValues()) {
+        if (!validateBoardValues(boardValues)) {
             return new BoardResult(null, "Board values are not valid", false);
         }
 
@@ -42,7 +45,7 @@ public final class SudukoBoardBuilder {
      *
      * @return true if values size are valid
      */
-    private boolean validateBoardValues() {
+    private boolean validateBoardValues(int[][] boardValues) {
         if (boardValues == null) {
             return false;
         }

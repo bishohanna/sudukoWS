@@ -25,7 +25,7 @@ public class SudukoBoardBuilderTest {
     @Test
     public void testBuildingBlocks() {
         //build board
-        BoardResult boardResult = new SudukoBoardBuilder(boardValues).buildBoard();
+        BoardResult boardResult = new SudukoBoardBuilder().buildBoard(boardValues);
 
         //board should be created successfully
         Assert.assertTrue("Board Creation error", boardResult.isOperationSuccess());

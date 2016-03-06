@@ -53,6 +53,7 @@ public final class SudukoBoardImpl implements SudukoBoard {
         }
 
         return new BoardResult(this, canBeAdded)
+                .setOperationResults(validateResults)
                 .setMessage(canBeAdded ? "Number can be added" : "Number can't be added").setBoardValid(false);
     }
 
@@ -72,8 +73,13 @@ public final class SudukoBoardImpl implements SudukoBoard {
             return new BoardResult(this, "X Y coordinates are invalid !", false);
         }
 
-        boolean addSuccess = true;
+        //validate before add
+        BoardResult validateAddNumber = validateAddNumber(number, x, y);
+        if (!validateAddNumber.isOperationSuccess()) {
+            return validateAddNumber; //return the validation result if not valid
+        }
 
+        boolean addSuccess = true;
         //handle blocks
         List<BlockOperationResult> addResults = new LinkedList<>();
         for (Block block : blocks) {

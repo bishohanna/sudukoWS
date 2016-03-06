@@ -4,6 +4,7 @@ package com.suduko.rest;
 import com.suduko.game.board.SudukoBoard;
 import com.suduko.game.board.SudukoBoardBuilder;
 import com.suduko.game.response.BoardResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 public class SudukoRestController {
 
     private final String GAME_SESSION_KEY = "sudukoGame";
+    private final SudukoBoardBuilder sudukoBoardBuilder;
+
+    @Autowired
+    public SudukoRestController(SudukoBoardBuilder sudukoBoardBuilder) {
+        this.sudukoBoardBuilder = sudukoBoardBuilder;
+    }
 
     //initial game values
     private final int[][] boardValues = new int[][]
@@ -159,7 +166,7 @@ public class SudukoRestController {
         if (req.getSession().getAttribute(GAME_SESSION_KEY) != null) {
             boardResult = (BoardResult) req.getSession().getAttribute(GAME_SESSION_KEY);
         } else {
-            boardResult = new SudukoBoardBuilder(boardValues).buildBoard();
+            boardResult = sudukoBoardBuilder.buildBoard(boardValues);
             req.getSession().setAttribute(GAME_SESSION_KEY, boardResult);
         }
 

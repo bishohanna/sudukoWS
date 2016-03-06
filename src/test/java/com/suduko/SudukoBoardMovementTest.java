@@ -74,7 +74,7 @@ public class SudukoBoardMovementTest {
 
 
     private SudukoBoard createSampleBoard() {
-        return new SudukoBoardBuilder(boardValues).buildBoard().getBoard();
+        return new SudukoBoardBuilder().buildBoard(boardValues).getBoard();
     }
 
 }
