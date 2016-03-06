@@ -16,17 +16,17 @@ public class SudukoRestController {
     private final String GAME_SESSION_KEY = "sudukoGame";
 
     //initial game values
-    private final int[][] sudukoUnCompleteBoard = new int[][]
+    private final int[][] boardValues = new int[][]
             {
-                    {5, 3, 4, 6, 7, 8, 9, 1, 2},
-                    {6, 7, 2, 1, 9, 5, 3, 4, 8},
-                    {1, 9, 8, 3, 4, 2, 5, 6, 0},//7 remaining
-                    {8, 5, 9, 7, 6, 1, 4, 2, 3},
-                    {4, 2, 6, 8, 5, 3, 7, 9, 1},
-                    {7, 1, 3, 9, 2, 0, 8, 5, 6},//4 remaining
-                    {9, 6, 1, 5, 3, 7, 2, 8, 4},
-                    {2, 8, 7, 4, 1, 9, 6, 3, 5},
-                    {3, 4, 5, 2, 8, 6, 1, 7, 9},
+                    {7, 0, 0, 0, 4, 0, 5, 3, 0},
+                    {0, 0, 5, 0, 0, 8, 0, 1, 0},
+                    {0, 0, 8, 5, 0, 9, 0, 4, 0},
+                    {5, 3, 9, 0, 6, 0, 0, 0, 1},
+                    {0, 0, 0, 0, 1, 0, 0, 0, 5},
+                    {8, 0, 0, 7, 2, 0, 9, 0, 0},
+                    {9, 0, 7, 4, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 5, 7, 0, 0, 0},
+                    {6, 0, 0, 0, 0, 0, 0, 5, 0},
 
             };
 
@@ -159,7 +159,7 @@ public class SudukoRestController {
         if (req.getSession().getAttribute(GAME_SESSION_KEY) != null) {
             boardResult = (BoardResult) req.getSession().getAttribute(GAME_SESSION_KEY);
         } else {
-            boardResult = new SudukoBoardBuilder(sudukoUnCompleteBoard).buildBoard();
+            boardResult = new SudukoBoardBuilder(boardValues).buildBoard();
             req.getSession().setAttribute(GAME_SESSION_KEY, boardResult);
         }
 
